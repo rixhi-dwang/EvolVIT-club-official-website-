@@ -7,21 +7,21 @@ const Testimonials = () => {
     {
       name: 'Jessica Liu',
       role: 'Computer Science, Class of 2024',
-      quote: 'EvoVit has been a game-changer for my college experience. The hackathons and workshops helped me land my dream internship at a top tech company.',
+      quote: 'EvolVit has been a game-changer for my college experience. The hackathons and workshops helped me land my dream internship at a top tech company.',
       image: 'https://via.placeholder.com/100x100/0f1320/00f5ff?text=JL',
       gradient: 'from-[#00f5ff] to-[#a855f7]'
     },
     {
       name: 'Marcus Thompson',
       role: 'Data Science, Class of 2025',
-      quote: 'The mentorship and community at EvoVit are unparalleled. I\'ve grown both technically and personally through their amazing programs.',
+      quote: 'The mentorship and community at EvolVit are unparalleled. I\'ve grown both technically and personally through their amazing programs.',
       image: 'https://via.placeholder.com/100x100/0f1320/a855f7?text=MT',
       gradient: 'from-[#a855f7] to-[#ff00cc]'
     },
     {
       name: 'Priya Sharma',
       role: 'AI Research, Class of 2023',
-      quote: 'Being part of EvoVit opened doors I never knew existed. The network and skills I gained here continue to benefit my career.',
+      quote: 'Being part of EvolVit opened doors I never knew existed. The network and skills I gained here continue to benefit my career.',
       image: 'https://via.placeholder.com/100x100/0f1320/ff00cc?text=PS',
       gradient: 'from-[#ff00cc] to-[#00f5ff]'
     }

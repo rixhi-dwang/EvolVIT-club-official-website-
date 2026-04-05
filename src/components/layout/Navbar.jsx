@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="relative group">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#00f5ff] via-[#a855f7] to-[#ff00cc] bg-clip-text text-transparent">
-            EvoVit
+            EvolVit
           </h1>
           <div className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#00f5ff] via-[#a855f7] to-[#ff00cc] scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
         </Link>

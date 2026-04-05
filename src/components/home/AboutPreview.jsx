@@ -10,7 +10,7 @@ const AboutPreview = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               About{' '}
               <span className="bg-gradient-to-r from-[#00f5ff] to-[#a855f7] bg-clip-text text-transparent">
-                EvoVit
+                EvolVit
               </span>
             </h2>
             <p className="text-[#cbd5e1] mb-6 leading-relaxed">
