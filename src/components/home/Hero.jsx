@@ -1,8 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import Typewriter from '../common/Typewriter'
 
 const Hero = () => {
   const canvasRef = useRef(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const mouseXSpring = useSpring(x)
+  const mouseYSpring = useSpring(y)
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -71,6 +79,16 @@ const Hero = () => {
     }
   }, [])
 
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseX = (e.clientX - rect.left) / width
+    const mouseY = (e.clientY - rect.top) / height
+    x.set(mouseX - 0.5)
+    y.set(mouseY - 0.5)
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
@@ -78,24 +96,48 @@ const Hero = () => {
 
       <div className="relative container mx-auto px-6 py-32 text-center z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00f5ff]/30 bg-[#00f5ff]/5 backdrop-blur-sm mb-8 animate-bounce">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00f5ff]/30 bg-[#00f5ff]/5 backdrop-blur-sm mb-8"
+          >
             <span className="w-2 h-2 rounded-full bg-[#00f5ff] animate-pulse" />
             <span className="text-sm text-[#00f5ff]">Innovate · Evolve · Lead</span>
-          </div>
+          </motion.div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#00f5ff] via-[#a855f7] to-[#ff00cc] bg-clip-text text-transparent animate-gradient">
-              Where Innovation
-            </span>
-            <br />
-            <span className="text-white">Meets Execution</span>
-          </h1>
+          <motion.div
+            style={{ rotateX, rotateY }}
+            onMouseMove={handleMouseMove}
+            className="perspective-1000"
+          >
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-[#00f5ff] via-[#a855f7] to-[#ff00cc] bg-clip-text text-transparent animate-gradient">
+                Where Innovation
+              </span>
+              <br />
+              <Typewriter 
+                texts={['Meets Execution', 'Comes Alive', 'Creates Magic', 'Changes World']}
+                delay={3000}
+              />
+            </h1>
+          </motion.div>
 
-          <p className="text-xl md:text-2xl text-[#cbd5e1] mb-12 max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-xl md:text-2xl text-[#cbd5e1] mb-12 max-w-2xl mx-auto"
+          >
             Join the most forward-thinking student community shaping the future of technology.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          >
             <Link
               to="/join"
               className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 hover:scale-105"
@@ -114,13 +156,18 @@ const Hero = () => {
                 Explore Events
               </span>
             </Link>
-          </div>
+          </motion.div>
 
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+          >
             <div className="w-6 h-10 rounded-full border-2 border-[#00f5ff]/50 flex justify-center">
               <div className="w-1 h-3 bg-[#00f5ff] rounded-full mt-2 animate-scroll" />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

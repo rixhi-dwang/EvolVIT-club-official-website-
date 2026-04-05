@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const Footer = () => {
   const quickLinks = [
@@ -8,6 +9,7 @@ const Footer = () => {
     { name: 'Events', path: '/events' },
     { name: 'Team', path: '/team' },
     { name: 'Gallery', path: '/gallery' },
+    { name: 'Achievements', path: '/achievements' },
     { name: 'Join Us', path: '/join' }
   ]
 
@@ -29,7 +31,12 @@ const Footer = () => {
 
       <div className="relative container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div className="space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
+          >
             <div className="group">
               <h2 className="text-3xl font-bold bg-gradient-to-r from-[#00f5ff] via-[#a855f7] to-[#ff00cc] bg-clip-text text-transparent">
                 EvoVit
@@ -54,7 +61,7 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           <div>
             <h3 className="text-xl font-bold text-white mb-6">Quick Links</h3>

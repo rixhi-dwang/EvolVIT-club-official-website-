@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -25,13 +26,19 @@ const Navbar = () => {
     { name: 'Events', path: '/events' },
     { name: 'Team', path: '/team' },
     { name: 'Gallery', path: '/gallery' },
+    { name: 'Achievements', path: '/achievements' },
     { name: 'Join', path: '/join' }
   ]
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      scrolled ? 'py-4 bg-[#05060a]/90 backdrop-blur-xl border-b border-[#00f5ff]/20' : 'py-6'
-    }`}>
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        scrolled ? 'py-4 bg-[#05060a]/90 backdrop-blur-xl border-b border-[#00f5ff]/20' : 'py-6'
+      }`}
+    >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="relative group">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#00f5ff] via-[#a855f7] to-[#ff00cc] bg-clip-text text-transparent">
@@ -54,9 +61,14 @@ const Navbar = () => {
               {({ isActive }) => (
                 <>
                   {item.name}
-                  <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-[#00f5ff] transition-transform duration-300 ${
-                    isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  }`} />
+                  <motion.span 
+                    className={`absolute -bottom-1 left-0 w-full h-[2px] bg-[#00f5ff] ${
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                    initial={false}
+                    animate={{ scaleX: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
                 </>
               )}
             </NavLink>
@@ -77,10 +89,13 @@ const Navbar = () => {
         </button>
       </div>
 
-      <div className={`lg:hidden absolute top-full left-0 w-full bg-[#05060a]/95 backdrop-blur-xl border-b border-[#00f5ff]/20 transition-all duration-500 ${
-        mobileMenuOpen ? 'opacity-100 visible py-6' : 'opacity-0 invisible py-0'
-      }`}>
-        <div className="container mx-auto px-6 flex flex-col space-y-4">
+      <motion.div 
+        initial={false}
+        animate={{ height: mobileMenuOpen ? 'auto' : 0, opacity: mobileMenuOpen ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="lg:hidden overflow-hidden bg-[#05060a]/95 backdrop-blur-xl border-b border-[#00f5ff]/20"
+      >
+        <div className="container mx-auto px-6 py-6 flex flex-col space-y-4">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
@@ -95,8 +110,8 @@ const Navbar = () => {
             </NavLink>
           ))}
         </div>
-      </div>
-    </nav>
+      </motion.div>
+    </motion.nav>
   )
 }
 
